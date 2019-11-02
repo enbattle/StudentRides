@@ -12,7 +12,7 @@ const userSchema = new Schema({
 	firstName: { type: String, unique: false, required: false },
     lastName: { type: String, unique: false, required: false },
     email: { type: String, unique: false, required: false },
-    phoneNumber: { type: String, unique: true, required: false },
+    phoneNumber: { type: String, unique: false, required: false },
     roles: { type: String, required: false },
 
 });
