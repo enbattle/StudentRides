@@ -3,7 +3,10 @@ import { Redirect } from 'react-router-dom'
 import { Route, Link } from 'react-router-dom'
 import logo from '../logo.svg';
 import '../App.css';
-import axios from 'axios'
+import axios from 'axios';
+//import bootstrap stuff
+// import Navbar from 'react-bootstrap/Navbar';
+
 
 class Navbar extends Component {
     constructor() {
@@ -31,6 +34,10 @@ class Navbar extends Component {
         const loggedIn = this.props.loggedIn;
         console.log('navbar render, props: ')
         console.log(this.props);
+        const logoStyle = {//style the 
+            width: 40
+
+        }
         
         return (
             <div>
@@ -59,8 +66,8 @@ class Navbar extends Component {
                     </div>
                     <div className="col-4 col-mr-auto">
                     <div id="top-filler"></div>
-                        <img src={logo} className="App-logo" alt="logo" />
-                        <h1 className="App-title">MERN Passport</h1>
+                        <img style={logoStyle} src={logo} className="App-logo" alt="logo" />
+                        <h1 className="App-title">Student Rides</h1>
                     </div>
                 </header>
             </div>
