@@ -6,7 +6,12 @@ import Signup from './components/sign-up'
 import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
 import Home from './components/home'
+<<<<<<< Updated upstream
 import 'bootstrap/dist/css/bootstrap.min.css';
+=======
+import StudentRoster from './components/student-roster'
+import 'bootstrap/dist/css/bootstrap.min.css';//
+>>>>>>> Stashed changes
 
 class App extends Component {
   constructor() {
@@ -80,6 +85,12 @@ class App extends Component {
           render={() =>
             <Signup
               signup={this.signup}
+            />}
+        />
+        <Route
+          path="/studentroster"
+          render={() =>
+            <StudentRoster
             />}
         />
 
