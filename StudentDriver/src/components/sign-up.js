@@ -34,16 +34,16 @@ class Signup extends Component {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			email: this.state.email,
-			phoneNumber: this.state.phonenumber,
+			phoneNumber: this.state.phoneNumber,
 			roles: this.state.roles,
 		})
 			.then(response => {
 				console.log(response)
 				if (!response.data.errmsg) {
 					console.log('successful signup')
-					this.setState({ //redirect to login page
-						redirectTo: '/login'
-					})
+					// this.setState({ //redirect to login page
+					// 	redirectTo: '/login'
+					// })
 				} else {
 					console.log('username already taken')
 				}
