@@ -5,8 +5,16 @@ import SimpleMap from './map.js';
 class Home extends Component {
     constructor() {
         super()
+        this.state = {
+            role: null,
+        }
     }
-
+    
+    componentDidMount(){
+        this.setState({
+            role: this.props.role
+        })
+    }
 
     render() {
         const imageStyle = {
@@ -16,7 +24,7 @@ class Home extends Component {
         return (
             <div>
                 <p>Welcome to Student Rides</p>
-                <SimpleMap/>
+                <SimpleMap role = {this.props.role}/>
             </div>
         )
     }

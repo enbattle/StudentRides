@@ -43,13 +43,15 @@ class App extends Component {
           loggedIn: true,
           username: response.data.user.username,
           role: response.data.user.roles
-        })
+        }, () =>{
+          console.log(this.state.role);
+        }) 
       } else {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
           username: null,
-          roles: null
+          role: null
         })
       }
     })
@@ -67,8 +69,10 @@ class App extends Component {
         }
         {/* Routes to different components */}
         <Route
-          exact path="/"
-          component={Home} />
+          path="/" 
+          render = {()=> <Home role={this.state.role}/>}
+
+          />
         <Route
           path="/login"
           render={() =>
@@ -86,7 +90,7 @@ class App extends Component {
         <Route
           path="/studentroster"
           render={() =>
-            <StudentRoster
+            <StudentRoster role = {this.state.role}
             />}
         />
 

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../database/models/user');
 const passport = require('../passport');
+const socketIo = require("socket.io")
 
 router.post('/', (req, res) => {
     console.log('user signup');
@@ -66,6 +67,20 @@ router.get('/', (req, res, next) => {
         res.json({ user: null })
     }
 })
+
+// router.get('/request', (req, res) => {
+//     io.on("connection", socket => {
+//         console.log("New client connected");
+//         if (interval) {
+//           clearInterval(interval);
+//         }
+//         interval = setInterval(() => socket.emit("FROM Student", location), 10000);
+//         socket.on("disconnect", () => {
+//           console.log("Client disconnected");
+//         });
+//       });
+//     var location = req.params.location;
+// })
 
 router.post('/logout', (req, res) => {
     if (req.user) {
