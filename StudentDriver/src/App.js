@@ -6,12 +6,8 @@ import Signup from './components/sign-up'
 import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
 import Home from './components/home'
-<<<<<<< Updated upstream
-import 'bootstrap/dist/css/bootstrap.min.css';
-=======
 import StudentRoster from './components/student-roster'
-import 'bootstrap/dist/css/bootstrap.min.css';//
->>>>>>> Stashed changes
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor() {
