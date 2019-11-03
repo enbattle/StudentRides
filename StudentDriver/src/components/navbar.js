@@ -22,7 +22,8 @@ class Navbar extends Component {
           if (response.status === 200) {
             this.props.updateUser({
               loggedIn: false,
-              username: null
+              username: null,
+              role: null
             })
           }
         }).catch(error => {
@@ -30,6 +31,10 @@ class Navbar extends Component {
         })
       }
 
+    componentDidMount(){
+        console.log(this.props);
+    }
+     
     render() {
         const loggedIn = this.props.loggedIn;
         console.log('navbar render, props: ')

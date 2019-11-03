@@ -6,14 +6,15 @@ import Signup from './components/sign-up'
 import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
 import Home from './components/home'
-import 'bootstrap/dist/css/bootstrap.min.css';//
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      role: null,
     }
 
     this.getUser = this.getUser.bind(this)
@@ -26,6 +27,7 @@ class App extends Component {
   }
 
   updateUser (userObject) {
+    console.log(userObject);
     this.setState(userObject)
   }
 
@@ -35,16 +37,18 @@ class App extends Component {
       console.log(response.data)
       if (response.data.user) {
         console.log('Get User: There is a user saved in the server session: ')
-
+        console.log(response.data.user);
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          username: response.data.user.username,
+          role: response.data.user.roles
         })
       } else {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
-          username: null
+          username: null,
+          roles: null
         })
       }
     })
@@ -55,7 +59,7 @@ class App extends Component {
     return (
       <div className="App">
    
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        <Navbar role = {this.state.role} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
         {/* greet user if logged in: */}
         {this.state.loggedIn &&
           <p>Join the party, {this.state.username}!</p>
