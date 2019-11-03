@@ -3,7 +3,31 @@ import GoogleMapReact from 'google-map-react';
 import marker from "./marker_tim.PNG";
 import '../assets/stylesheets/Marker.css';
 import socketIOClient from "socket.io-client";
+import {Button, Modal} from 'react-bootstrap';
 import axios from 'axios';
+
+
+const Popup = props => ( 
+  <div>
+  <Modal show={props.show} onHide={props.toggle} animation={false}>
+    <Modal.Header closeButton>
+      <Modal.Title>Ride Request</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <h5>Student needs a Ride Request from ({props.location.lng}, {props.location.lat})</h5>
+    </Modal.Body>
+
+    <Modal.Footer>
+      <Button variant="secondary" onClick={props.toggle}>
+        Close
+      </Button>
+      <Button variant="primary" onClick={props.accept}>
+        Accept
+      </Button>
+    </Modal.Footer>
+  </Modal>
+  </div>
+)
 
 const Marker = (props: any) => {
   const { color, name, id } = props;
@@ -14,6 +38,8 @@ const Marker = (props: any) => {
     />
   );
 };
+
+
 
 const AnyReactComponent = ({ text }) => <div> <img src={marker} height={20} width={16}/> { text } </div>;
 
@@ -26,14 +52,18 @@ class SimpleMap extends Component {
         lng: 0
       },
       endpoint: "http://127.0.0.1:8080",
+      showModal: false,
       requests: []
     }
     this.emitRequest = this.emitRequest.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.accept = this.accept.bind(this);
 	}
 
-  
+
   componentDidMount(){
    console.log(this.props);
+
    navigator.geolocation.getCurrentPosition( (position) => {
      //console.log(position);
      
@@ -58,9 +88,25 @@ class SimpleMap extends Component {
         console.log(newRequest);
         this.setState({
           requests: newRequest
+        }, () => {
+          this.toggle();
         });
+        
       });
     }
+  }
+
+  accept(){
+    alert("pending accept request!")
+  }
+
+  toggle(){
+    this.setState({
+      showModal: !this.state.showModal
+    }, () => {
+      console.log(this.state.showModal);
+    })
+
   }
 
   emitRequest() {
@@ -76,10 +122,15 @@ class SimpleMap extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
+      <div>
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyDYhxcltk36Kyg6aFUfdxSqPXVmXW8RX3w" }}
-          defaultCenter={this.state.center}
+          defaultCenter={{
+            lat: 42,
+            lng: -76
+          }}
+
           defaultZoom={this.state.zoom}
         > 
         {this.props.role == "driver" && 
@@ -108,7 +159,9 @@ class SimpleMap extends Component {
           })}
         </GoogleMapReact>
         {this.props.role == "student" && <button className ="btn btn-primary" onClick = {this.emitRequest}>Make Request</button>}
-        
+      </div>
+      {this.state.requests.length > 0 && <Popup show={this.state.showModal} location={this.state.requests[0]} toggle={this.toggle} accept={this.accept}/>}
+      
       </div>
     );
   }

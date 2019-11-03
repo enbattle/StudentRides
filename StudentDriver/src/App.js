@@ -7,7 +7,7 @@ import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
 import Home from './components/home'
 import StudentRoster from './components/student-roster'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 class App extends Component {
   constructor() {

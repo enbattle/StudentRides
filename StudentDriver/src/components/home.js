@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SimpleMap from './map.js';
 
-
 class Home extends Component {
     constructor() {
         super()

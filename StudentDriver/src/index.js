@@ -7,8 +7,8 @@ import * as serviceWorker from './serviceWorker';
 
 //style
 import './index.css';
-import 'spectre.css/dist/spectre.min.css';
-import 'spectre.css/dist/spectre-icons.css';
+// import 'spectre.css/dist/spectre.min.css';
+// import 'spectre.css/dist/spectre-icons.css';
 
 
 ReactDOM.render(
