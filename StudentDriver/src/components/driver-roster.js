@@ -1,33 +1,37 @@
 import React, { Component } from 'react';
 import SimpleMap from './map.js';
 
-class StudentRoster extends Component {
+class DriverRoster extends Component {
     constructor() {
         super()
         this.state = {
             usersList: [{
-                firstName: 'Kristofer',
-                lastName: 'Kwan',
-                email: 'kristofer.kwan@gmail.com',
-                phoneNumber: '1111111111'
+                firstName: 'Jelly',
+                lastName: 'Wang',
+                email: 'Jelly.Wang@gmail.com',
+                licensePlate: '1111111111',
+                carModel: 'Tesla1'
             },
             {
-                firstName: 'Cristofer',
-                lastName: 'Cwan',
-                email: 'cristofer.cwan@gmail.com',
-                phoneNumber: '2222222222'
+                firstName: 'Kelly',
+                lastName: 'Kang',
+                email: 'Jelly.Jang@gmail.com',
+                licensePlate: '2222222222',
+                carModel: 'Tesla2'
             },
             {
-                firstName: 'Xristofer',
-                lastName: 'Xwan',
-                email: 'xristofer.xwan@gmail.com',
-                phoneNumber: '3333333333'
+                firstName: 'Lelly',
+                lastName: 'Lang',
+                email: 'Lelly.Lang@gmail.com',
+                licensePlate: '3333333333',
+                carModel: 'Tesla3'
             },
             {
-                firstName: 'Yristofer',
-                lastName: 'Ywan',
-                email: 'yristofer.ywan@gmail.com',
-                phoneNumber: '4444444444'
+                firstName: 'Delly',
+                lastName: 'Dang',
+                email: 'Delly.Dang@gmail.com',
+                licensePlate: '4444444444',
+                carModel: 'Tesla4'
             }]
         }
     }
@@ -40,7 +44,8 @@ class StudentRoster extends Component {
                 <td>{this.state.usersList[i].firstName}</td>
                 <td>{this.state.usersList[i].lastName}</td>
                 <td>{this.state.usersList[i].email}</td>
-                <td>{this.state.usersList[i].phoneNumber}</td>
+                <td>{this.state.usersList[i].licensePlate}</td>
+                <td>{this.state.usersList[i].carModel}</td>
             </tr>
             )
         }
@@ -56,14 +61,15 @@ class StudentRoster extends Component {
     render() {
         return (
            <div>
-              <h1 id='title'>Student Roster</h1>
+              <h1 id='title'>Driver Roster</h1>
               <table class="table table-dark">    
                 <thead>
                     <tr>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Phone Number</th>
+                    <th scope="col">License Plate</th>
+                    <th scope="col">Car Model</th>
                     </tr>
                 </thead>               
                 <tbody>
@@ -74,4 +80,4 @@ class StudentRoster extends Component {
         )
      }
 }
-export default StudentRoster;
+export default DriverRoster;

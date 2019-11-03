@@ -46,48 +46,31 @@ class Navbar1 extends Component {
         }
         
         return (
-            <div>
-                <h1 className="App-title">Student Rides</h1>
+            <div>               
                 <Navbar bg="dark" expand="lg" >
                 <div className="col-4" >
                         {loggedIn ? (
                             <section className="navbar-section">
                                 <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
-                                <span className="text-secondary">logout</span></Link>
+                                <span className="text-secondary">Logout</span></Link>
 
                             </section>
                         ) : (
-                            <section className="navbar-section">
-					
-														<Link to="/" className="btn btn-link text-secondary border">
-																<div className="text-secondary">Home</div>
-														</Link>
-					
-														
-														<Link to="/login" className="btn btn-link text-secondary">
-																<div className="text-secondary">School Login</div>
+                                <section className="navbar-section">
+                                    <Link to="/" className="btn btn-link text-secondary">
+                                        <span className="text-secondary">Request</span>
+                                        </Link>
+                                    <Link to="/" className="btn btn-link text-secondary">
+                                        <span className="text-secondary">Cancel</span>
 				                    </Link>
-					
-														<Link to="/login" className="btn btn-link text-secondary">
-																<div className="text-secondary">Student Login</div>
-				                    </Link>
-					
-														<Link to="/signup" className="btn btn-link">
-																<div className="text-secondary">Administrator</div>
-				                    </Link>
+                                    
                                 </section>
                             )}
                     </div>
-                    <div className="col-4 col-mr-auto">
-                    {/* <div id="top-filler"></div> */}
-                        {/* <img style={logoStyle} src={logo} className="App-logo" alt="logo" /> */}
-                        
+                    <div className="col-4 col-mr-auto">                        
                     </div>
 
-                </Navbar>
-                {/* <header className="navbar App-header" id="nav-container">
-                    
-                </header> */}
+                </Navbar>              
             </div>
 
         );

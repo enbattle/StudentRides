@@ -22,8 +22,8 @@ class Home extends Component {
         };
         return (
             <div>
-                <p>Welcome to Student Rides</p>
-                <SimpleMap role = {this.props.role}/>
+               
+                <SimpleMap role={this.props.role}/>
             </div>
         )
     }

@@ -4,9 +4,12 @@ import { Route, Link } from 'react-router-dom'
 // components
 import Signup from './components/sign-up'
 import LoginForm from './components/login-form'
-import Navbar from './components/navbar'
+import NavbarSchool from './components/navbarSchool'
+import NavbarStudent from './components/navbarStudent'
+import NavbarDriver from './components/navbarDriver'
 import Home from './components/home'
 import StudentRoster from './components/student-roster'
+import DriverRoster from './components/driver-roster'
 import 'bootstrap/dist/css/bootstrap.min.css';//
 
 class App extends Component {
@@ -62,7 +65,7 @@ class App extends Component {
     return (
       <div className="App">
    
-        <Navbar role = {this.state.role} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        <NavbarSchool role = {this.state.role} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
         {/* greet user if logged in: */}
         {this.state.loggedIn &&
           <p>Join the party, {this.state.username}!</p>
@@ -88,12 +91,17 @@ class App extends Component {
             />}
         />
         <Route
-          path="/studentroster"
+          path="/student-roster"
           render={() =>
             <StudentRoster role = {this.state.role}
             />}
         />
-
+        <Route
+          path="/driver-roster"
+          render={() =>
+            <DriverRoster
+            />}
+        />
       </div>
     );
   }
