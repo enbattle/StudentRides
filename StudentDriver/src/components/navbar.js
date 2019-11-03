@@ -44,15 +44,23 @@ class Navbar extends Component {
 
                             </section>
                         ) : (
-                                <section className="navbar-section">
-                                    <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">home</span>
-                                        </Link>
-                                    <Link to="/login" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">login</span>
+                            <section className="navbar-section">
+					
+														<Link to="/" className="btn btn-link text-secondary border">
+																<div className="text-secondary">Home</div>
+														</Link>
+					
+														
+														<Link to="/login" className="btn btn-link text-secondary">
+																<div className="text-secondary">School Login</div>
 				                    </Link>
-                                    <Link to="/signup" className="btn btn-link">
-                                        <span className="text-secondary">sign up</span>
+					
+														<Link to="/login" className="btn btn-link text-secondary">
+																<div className="text-secondary">Student Login</div>
+				                    </Link>
+					
+														<Link to="/signup" className="btn btn-link">
+																<div className="text-secondary">Administrator</div>
 				                    </Link>
                                 </section>
                             )}
