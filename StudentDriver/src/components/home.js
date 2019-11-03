@@ -15,7 +15,7 @@ class Home extends Component {
         };
         return (
             <div>
-                <p>Welcome to Student Rides</p>
+               
                 <SimpleMap/>
             </div>
         )

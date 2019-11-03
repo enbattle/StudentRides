@@ -31,6 +31,23 @@ class Navbar1 extends Component {
             console.log('Logout error')
         })
       }
+      studentRoster(){
+        // <Link to="#" className="btn btn-link text-secondary" onClick={this.addStudent}>
+        // <span className="text-secondary">Add Student</span></Link>
+        // <Link to="#" className="btn btn-link text-secondary" onClick={this.removeStudent}>
+        // <span className="text-secondary">Remove Student</span></Link>
+
+      }
+      driverRoster(){
+          // <Link to="#" className="btn btn-link text-secondary" onClick={this.addStudent}>
+        // <span className="text-secondary">Add Driver</span></Link>
+        // <Link to="#" className="btn btn-link text-secondary" onClick={this.removeStudent}>
+        // <span className="text-secondary">Remove Driver</span></Link>
+
+    }
+    addStudent(){
+
+    }
 
     componentDidMount(){
         console.log(this.props);
@@ -47,13 +64,22 @@ class Navbar1 extends Component {
         
         return (
             <div>
-                <h1 className="App-title">Student Rides</h1>
+                
                 <Navbar bg="dark" expand="lg" >
                 <div className="col-4" >
                         {loggedIn ? (
                             <section className="navbar-section">
+                               
+                                {/* should redirect to the students roster page */}
+                                <Link to="#" className="btn btn-link text-secondary" onClick={this.studentRoster}>
+                                <span className="text-secondary">View Students</span></Link>{/* take user to roster page */}
+                                {/* should redirect to the drivers roster page */}
+                                <Link to="#" className="btn btn-link text-secondary" onClick={this.driverRoster}>
+                                <span className="text-secondary">View Drivers</span></Link>{/* take user to driver page */}
                                 <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
-                                <span className="text-secondary">logout</span></Link>
+                                <span className="text-secondary">Logout</span></Link>
+                                 
+
 
                             </section>
                         ) : (
