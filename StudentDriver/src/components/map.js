@@ -24,7 +24,7 @@ class SimpleMap extends Component {
           <AnyReactComponent
             lat={59.955413}
             lng={30.337844}
-            text="My Marker"
+            text="Your Location"
           />
         </GoogleMapReact>
       </div>
