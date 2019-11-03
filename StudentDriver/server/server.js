@@ -16,6 +16,8 @@ const server = http.createServer(app);
 const user = require('./routes/user');
 const io = socketIo(server); // < Interesting!
 
+
+
 // MIDDLEWARE
 app.use(morgan('dev'))
 app.use(
@@ -44,15 +46,23 @@ app.use(passport.session()) // calls the deserializeUser
 app.use('/user', user)
 
 app.get('/request', (req, res) => {
-	console.log("here!!\n");
-	var location = JSON.parse(req.query.location);
-	
-	console.log(location);
-	io.emit('FROM Student', location);	
+	console.log("req.params", req.params);
+	var result = JSON.parse(req.query.result);
+	console.log("req location params ==>", result.location);
+	console.log("req socket params ==>", result.socketID);
+	var location = result.location;
+	var id = result.socketID;
+	io.emit('FROM Student', location, id);
 })
 
 io.on('connection', function(socket) {
     // Use socket to communicate with this particular client only, sending it it's own id
+	//like a server;
+	socket.on("acceptCalls", (id, msg) => {
+		console.log("driver wants to emit a message to socket", id);
+		socket.broadcast.to(id).emit('ACCEPT', msg);
+	});
+	socket.emit("socketID", socket.id);
 });
 
 
