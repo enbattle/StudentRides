@@ -5,8 +5,10 @@ import logo from '../logo.svg';
 import '../App.css';
 import axios from 'axios';
 //import bootstrap stuff
-// import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+
 import Navbar from 'react-bootstrap/Navbar';
+
 
 
 class Navbar1 extends Component {
@@ -31,23 +33,7 @@ class Navbar1 extends Component {
             console.log('Logout error')
         })
       }
-      studentRoster(){
-        // <Link to="#" className="btn btn-link text-secondary" onClick={this.addStudent}>
-        // <span className="text-secondary">Add Student</span></Link>
-        // <Link to="#" className="btn btn-link text-secondary" onClick={this.removeStudent}>
-        // <span className="text-secondary">Remove Student</span></Link>
-
-      }
-      driverRoster(){
-          // <Link to="#" className="btn btn-link text-secondary" onClick={this.addStudent}>
-        // <span className="text-secondary">Add Driver</span></Link>
-        // <Link to="#" className="btn btn-link text-secondary" onClick={this.removeStudent}>
-        // <span className="text-secondary">Remove Driver</span></Link>
-
-    }
-    addStudent(){
-
-    }
+     
 
     componentDidMount(){
         console.log(this.props);
@@ -63,49 +49,42 @@ class Navbar1 extends Component {
         }
         
         return (
-            <div>
-                
-                <Navbar bg="dark" expand="lg" >
-                <div className="col-4" >
-                        {loggedIn ? (
-                            <section className="navbar-section">
-                               
-                                {/* should redirect to the students roster page */}
-                                <Link to="#" className="btn btn-link text-secondary" onClick={this.studentRoster}>
-                                <span className="text-secondary">View Students</span></Link>{/* take user to roster page */}
-                                {/* should redirect to the drivers roster page */}
-                                <Link to="#" className="btn btn-link text-secondary" onClick={this.driverRoster}>
-                                <span className="text-secondary">View Drivers</span></Link>{/* take user to driver page */}
-                                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
-                                <span className="text-secondary">Logout</span></Link>
-                                 
+            <div className="navbar-section justify-content-center">
+                <Navbar className="justify-content-center " bg="dark" variant="dark" expand="lg">
+                < Navbar.Brand href="/home">Student Rides</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                {loggedIn ? (
+                    <Nav className="navbar-section justify-content-center">
+                        <Link to="student-roster" className="btn btn-link text-secondary" >
+                        <span className="text-secondary" >View Students</span>
+                    </Link>
+                    <Link  to="driver-roster" className="btn btn-link text-secondary" >
+                        <span className="text-secondary" >View Drivers</span></Link >
+                     <Link  to="" className="btn btn-link text-secondary" onClick={this.logout}>
+                        <span className="text-secondary" >Logout</span></Link >
 
-
-                            </section>
-                        ) : (
-                                <section className="navbar-section">
-                                    <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">home</span>
-                                        </Link>
-                                    <Link to="/login" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">login</span>
-				                    </Link>
-                                    <Link to="/signup" className="btn btn-link">
-                                        <span className="text-secondary">sign up</span>
-				                    </Link>
-                                </section>
-                            )}
-                    </div>
-                    <div className="col-4 col-mr-auto">
-                    {/* <div id="top-filler"></div> */}
-                        {/* <img style={logoStyle} src={logo} className="App-logo" alt="logo" /> */}
-                        
-                    </div>
-
-                </Navbar>
-                {/* <header className="navbar App-header" id="nav-container">
+                    </Nav>
                     
-                </header> */}
+                        ) : (  
+                           
+                     <Nav className="navbar-section justify-content-center">
+                     <Link  to="/" className="btn btn-link text-secondary">
+                            <span className="text-secondary" >Home</span>
+                        </Link >
+                        <Link  to="/login" className="btn btn-link text-secondary">
+                            <span className="text-secondary" >Login</span>
+                        </Link >
+                        <Link  to="/signup" className="btn btn-link">
+                            <span className="text-secondary">Sign Up</span>
+                        </Link >
+                    </Nav>  
+                    )}
+                   
+                </Navbar.Collapse>
+                
+                </Navbar>
+
             </div>
 
         );
@@ -114,3 +93,4 @@ class Navbar1 extends Component {
 }
 
 export default Navbar1
+
