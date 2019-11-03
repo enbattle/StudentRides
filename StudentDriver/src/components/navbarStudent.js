@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Route, Link } from 'react-router-dom'
-import logo from '../logo.svg';
 import '../App.css';
 import axios from 'axios';
 //import bootstrap stuff
 // import Navbar from 'react-bootstrap/Navbar';
 import Navbar from 'react-bootstrap/Navbar';
-
+import logo from '../assets/images/logo.jpg';
 
 class Navbar1 extends Component {
     constructor() {
@@ -48,6 +47,7 @@ class Navbar1 extends Component {
         return (
             <div>               
                 <Navbar bg="dark" expand="lg" >
+                <Navbar.Brand><img src={logo} style={{width: 40}}></img></Navbar.Brand>
                 <div className="col-4" >
                         {loggedIn ? (
                             <section className="navbar-section">

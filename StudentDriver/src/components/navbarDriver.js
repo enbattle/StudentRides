@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Route, Link } from 'react-router-dom'
-import logo from '../logo.svg';
+
 import '../App.css';
 import axios from 'axios';
 //import bootstrap stuff
-// import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import logo from '../assets/images/logo.jpg';
 
 
 class Navbar1 extends Component {
@@ -31,6 +32,7 @@ class Navbar1 extends Component {
             console.log('Logout error')
         })
       }
+     
 
     componentDidMount(){
         console.log(this.props);
@@ -46,31 +48,35 @@ class Navbar1 extends Component {
         }
         
         return (
-            <div>               
-                <Navbar bg="dark" expand="lg" >
-                <div className="col-4" >
-                        {loggedIn ? (
-                            <section className="navbar-section">
-                                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
-                                <span className="text-secondary">Logout</span></Link>
+            <div className="navbar-section">
+                <Navbar bg="dark" variant="dark" expand="lg"  color="white!important">
+                <Navbar.Brand><img src={logo} style={{width: 60}}></img></Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse className="justify-content-center" id="basic-navbar-nav ">
+                {loggedIn ? (
+                    <Nav className="navbar-section ">
+                        
+                     <Link  to="" className="btn btn-link text-secondary" onClick={this.logout}>
+                        <span className="text-light" >Logout</span></Link >
 
-                            </section>
-                        ) : (
-                                <section className="navbar-section">
-                                    <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary"></span>
-                                        </Link>
-                                    <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">Cancel</span>
-				                    </Link>
-                                    
-                                </section>
-                            )}
-                    </div>
-                    <div className="col-4 col-mr-auto">                        
-                    </div>
+                    </Nav>
+                    
+                        ) : (  
+                           
+                     <Nav className="navbar-section ">
+                     <Link  to="/" className="btn btn-link text-light">
+                            <span className="text-light" >Home</span>
+                        </Link >
+                        <Link  to="/login" className="btn btn-link text-light">
+                            <span className="text-light" >Login</span>
+                        </Link >
+                    </Nav>  
+                    )}
+                   
+                </Navbar.Collapse>
+                
+                </Navbar>
 
-                </Navbar>              
             </div>
 
         );
@@ -79,3 +85,4 @@ class Navbar1 extends Component {
 }
 
 export default Navbar1
+

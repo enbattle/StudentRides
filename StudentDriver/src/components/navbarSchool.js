@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Route, Link } from 'react-router-dom'
-import logo from '../logo.svg';
 import '../App.css';
 import axios from 'axios';
 //import bootstrap stuff
 import Nav from 'react-bootstrap/Nav';
 
 import Navbar from 'react-bootstrap/Navbar';
-
+import logo from '../assets/images/logo.jpg';
 
 
 class Navbar1 extends Component {
@@ -49,34 +48,34 @@ class Navbar1 extends Component {
         }
         
         return (
-            <div className="navbar-section justify-content-center">
-                <Navbar className="justify-content-center " bg="dark" variant="dark" expand="lg">
-                < Navbar.Brand href="/home">Student Rides</Navbar.Brand>
+            <div className="navbar-section">
+                <Navbar bg="dark" variant="dark" expand="lg"  color="white!important">
+                <Navbar.Brand><img src={logo} style={{width: 60}}></img></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse className="justify-content-center" id="basic-navbar-nav ">
                 {loggedIn ? (
-                    <Nav className="navbar-section justify-content-center">
-                        <Link to="student-roster" className="btn btn-link text-secondary" >
-                        <span className="text-secondary" >View Students</span>
+                    <Nav className="navbar-section ">
+                        <Link to="student-roster" className="btn btn-secondary" >
+                        <span className="text-light" >View Students</span>
                     </Link>
                     <Link  to="driver-roster" className="btn btn-link text-secondary" >
-                        <span className="text-secondary" >View Drivers</span></Link >
+                        <span className="text-light" >View Drivers</span></Link >
                      <Link  to="" className="btn btn-link text-secondary" onClick={this.logout}>
-                        <span className="text-secondary" >Logout</span></Link >
+                        <span className="text-light" >Logout</span></Link >
 
                     </Nav>
                     
                         ) : (  
                            
-                     <Nav className="navbar-section justify-content-center">
-                     <Link  to="/" className="btn btn-link text-secondary">
-                            <span className="text-secondary" >Home</span>
+                     <Nav className="navbar-section ">
+                     <Link  to="/" className="btn btn-link text-light">
+                            <span className="text-light" >Home</span>
                         </Link >
-                        <Link  to="/login" className="btn btn-link text-secondary">
-                            <span className="text-secondary" >Login</span>
+                        <Link  to="/login" className="btn btn-link text-light">
+                            <span className="text-light" >Login</span>
                         </Link >
-                        <Link  to="/signup" className="btn btn-link">
-                            <span className="text-secondary">Sign Up</span>
+                        <Link  to="/signup" className="btn btn-link text-light">
+                            <span className="text-light">Sign Up</span>
                         </Link >
                     </Nav>  
                     )}

@@ -1,11 +1,61 @@
 import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
+import {withScriptjs, withGoogleMap, GoogleMap, Marker, DirectionsRenderer } from 'react-google-maps';
 import marker from "./marker_tim.PNG";
 import '../assets/stylesheets/Marker.css';
 import socketIOClient from "socket.io-client";
 import {Button, Modal} from 'react-bootstrap';
+//import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 import axios from 'axios';
 const socket = socketIOClient.connect('http://localhost:8080');
+
+const AsyncGoogleMap = withScriptjs(
+  withGoogleMap(
+    props => (
+      <GoogleMap
+      bootstrapURLKeys={{ key: "AIzaSyDYhxcltk36Kyg6aFUfdxSqPXVmXW8RX3w" }}
+      defaultCenter={{
+        lat: 42,
+        lng: -76
+      }}
+
+      defaultZoom={props.zoom}
+    > 
+    {props.destination != null && <DirectionsRenderer origin={props.center} destination={props.destination} />}
+    {props.role == "driver" && 
+    <Marker
+        position={{lat: 42, lng: -76}}
+        color= "blue"
+        name= "My Marker"
+      />
+    }
+    {props.role == "student" && 
+    <Marker
+        position={{lat: props.center.lat, lng: props.center.lng}}
+        color= "blue"
+        name= "My Marker"
+      />
+    }
+
+
+      {props.requests.map((value, index)=>{
+        return <Marker position= {{lat: value.lat, lng:value.lng}}
+                color= "red"
+                name= "Student Marker"
+              />
+        
+      })}
+
+      {props.accepted.map((value, index)=>{
+        return <Marker position= {{lat: value.lat, lng:value.lng}}
+                color= "green"
+                name= "Student Marker"
+              />
+        
+      })}
+    </GoogleMap>
+    )
+  )
+)
 
 const DriverAccept = props => (
   <div>
@@ -48,15 +98,7 @@ const Popup = props => (
   </div>
 )
 
-const Marker = (props: any) => {
-  const { color, name, id } = props;
-  return (
-    <div className="marker"
-      style={{ backgroundColor: color, cursor: 'pointer'}}
-      title={name}
-    />
-  );
-};
+
 
 
 
@@ -73,6 +115,7 @@ class SimpleMap extends Component {
       endpoint: "http://127.0.0.1:8080",
       showModal: false,
       driverID: '',
+      destination: null,
       requests: [],
       accepted: [],
       socketID: '',
@@ -83,6 +126,7 @@ class SimpleMap extends Component {
     this.toggle = this.toggle.bind(this);
     this.toggleAccept = this.toggleAccept.bind(this);
     this.accept = this.accept.bind(this);
+    this.loadMap = this.loadMap.bind(this);
 	}
 
 
@@ -119,7 +163,8 @@ class SimpleMap extends Component {
       socket.on("ACCEPT", data => {
         //console.log("driver accept", data);
         this.setState({
-          driverID: data.socketID
+          driverID: data.socketID,
+          destination: {lat: data.lat, lng: data.lng}
         }, () => {
           this.toggleAccept();
         });
@@ -143,6 +188,7 @@ class SimpleMap extends Component {
         
       });
     }
+    this.setState({...this.state,nextProps})
   }
 
   accept(){ // for the driver to say he/she accepted
@@ -159,7 +205,8 @@ class SimpleMap extends Component {
     var accepted = this.state.accepted;
     accepted.push(accept_call);
     this.setState({
-      accepted: accepted
+      accepted: accepted,
+      destination: {lat:accept_call.lat, lng:accept_call.lng}
     }) 
   }
 
@@ -200,57 +247,23 @@ class SimpleMap extends Component {
       //console.log("sent a request!\n");
     });
   }
+  loadMap(){
+    return(
+      <AsyncGoogleMap 
+      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYhxcltk36Kyg6aFUfdxSqPXVmXW8RX3w"
+loadingElement={<div style={{ height: `100vh` }} />}
+containerElement={<div style={{ height: `100vh` }} />}
+mapElement={<div style={{ height: `100vh` }} />}
+    zoom={this.state.zoom} destination={this.state.destination} center={this.state.center} role={this.props.role} requests={this.state.requests} accepted={this.state.accepted} key="map"></AsyncGoogleMap>
+    )
+  }
 
   render() {
     return (
       // Important! Always set the container height explicitly
       <div>
-      <div style={{ height: '100vh', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyDYhxcltk36Kyg6aFUfdxSqPXVmXW8RX3w" }}
-          defaultCenter={{
-            lat: 42,
-            lng: -76
-          }}
-
-          defaultZoom={this.state.zoom}
-        > 
-        {this.props.role == "driver" && 
-        <Marker
-            lat={42}
-            lng={-76}
-            color= "blue"
-            name= "My Marker"
-          />
-        }
-        {this.props.role == "student" && 
-        <Marker
-            lat={this.state.center.lat}
-            lng={this.state.center.lng}
-            color= "blue"
-            name= "My Marker"
-          />
-        }
-
-
-          {this.state.requests.map((value, index)=>{
-            return <Marker lat={value.lat} lng={value.lng}
-                    color= "red"
-                    name= "Student Marker"
-                  />
-            
-          })}
-
-          {this.state.accepted.map((value, index)=>{
-            return <Marker lat={value.lat} lng={value.lng}
-                    color= "green"
-                    name= "Student Marker"
-                  />
-            
-          })}
-        </GoogleMapReact>
-        {this.props.role == "student" && <button className ="btn btn-primary" onClick = {this.emitRequest}>Make Request</button>}
-      </div>
+      {this.loadMap()}
+      {this.props.role == "student" && <button className ="btn btn-primary" onClick = {this.emitRequest}>Make Request</button>}
       {this.state.requests.length > 0 && <Popup show={this.state.showModal} location={this.state.requests[0]} toggle={this.toggleRejectReq} accept={this.accept}/>}
       <DriverAccept show={this.state.showAccept}  toggle={this.toggleAccept} />
       </div>
