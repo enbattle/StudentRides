@@ -6,9 +6,10 @@ import '../App.css';
 import axios from 'axios';
 //import bootstrap stuff
 // import Navbar from 'react-bootstrap/Navbar';
+import Navbar from 'react-bootstrap/Navbar';
 
 
-class Navbar extends Component {
+class Navbar1 extends Component {
     constructor() {
         super()
         this.logout = this.logout.bind(this)
@@ -46,9 +47,9 @@ class Navbar extends Component {
         
         return (
             <div>
-
-                <header className="navbar App-header" id="nav-container">
-                    <div className="col-4" >
+                <h1 className="App-title">Student Rides</h1>
+                <Navbar bg="dark" expand="lg" >
+                <div className="col-4" >
                         {loggedIn ? (
                             <section className="navbar-section">
                                 <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
@@ -70,11 +71,15 @@ class Navbar extends Component {
                             )}
                     </div>
                     <div className="col-4 col-mr-auto">
-                    <div id="top-filler"></div>
-                        <img style={logoStyle} src={logo} className="App-logo" alt="logo" />
-                        <h1 className="App-title">Student Rides</h1>
+                    {/* <div id="top-filler"></div> */}
+                        {/* <img style={logoStyle} src={logo} className="App-logo" alt="logo" /> */}
+                        
                     </div>
-                </header>
+
+                </Navbar>
+                {/* <header className="navbar App-header" id="nav-container">
+                    
+                </header> */}
             </div>
 
         );
@@ -82,4 +87,4 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar
+export default Navbar1
