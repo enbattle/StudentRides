@@ -61,10 +61,10 @@ render() {
 			<h4>Sign up</h4>
 			<form className="form-horizontal">
 				<div className="form-group">
-					<div className="col-1 col-ml-auto">
+					<div className="col-ml-auto">
 						<label className="form-label" htmlFor="username">Username</label>
 					</div>
-					<div className="col-3 col-mr-auto">
+					<div className="col-mr-auto">
 						<input className="form-input"
 							type="text"
 							id="username"
@@ -76,10 +76,10 @@ render() {
 					</div>
 				</div>
 				<div className="form-group">
-					<div className="col-1 col-ml-auto">
+					<div className="col-ml-auto">
 						<label className="form-label" htmlFor="password">Password: </label>
 					</div>
-					<div className="col-3 col-mr-auto">
+					<div className="col-mr-auto">
 						<input className="form-input"
 							placeholder="password"
 							type="password"
@@ -90,10 +90,10 @@ render() {
 					</div>
 				</div>
 				<div className="form-group">
-					<div className="col-1 col-ml-auto">
+					<div className="col-ml-auto">
 						<label className="form-label" htmlFor="firstName">First Name: </label>
 					</div>
-					<div className="col-3 col-mr-auto">
+					<div className="col-mr-auto">
 						<input className="form-input"
 							type="text"
 							id="firstName"
@@ -105,10 +105,10 @@ render() {
 					</div>
 				</div>
 				<div className="form-group">
-					<div className="col-1 col-ml-auto">
+					<div className="col-ml-auto">
 						<label className="form-label" htmlFor="lastName">Last Name: </label>
 					</div>
-					<div className="col-3 col-mr-auto">
+					<div className="col-mr-auto">
 						<input className="form-input"
 							type="text"
 							id="lastName"
@@ -120,10 +120,10 @@ render() {
 					</div>
 				</div>
 				<div className="form-group">
-					<div className="col-1 col-ml-auto">
+					<div className="col-ml-auto">
 						<label className="form-label" htmlFor="lastName">Email: </label>
 					</div>
-					<div className="col-3 col-mr-auto">
+					<div className="col-mr-auto">
 						<input className="form-input"
 							type="email"
 							id="email"
@@ -135,10 +135,10 @@ render() {
 					</div>
 				</div>
 				<div className="form-group">
-					<div className="col-1 col-ml-auto">
+					<div className="col-ml-auto">
 						<label className="form-label" htmlFor="phoneNumber">Phone Number: </label>
 					</div>
-					<div className="col-3 col-mr-auto">
+					<div className="col-mr-auto">
 						<input className="form-input"
 							type="text"
 							id="phoneNumber"
@@ -150,10 +150,10 @@ render() {
 					</div>
 				</div>
 				<div className="form-group">
-					<div className="col-1 col-ml-auto">
+					<div className="col-ml-auto">
 						<label className="form-label" htmlFor="roles">Role: </label>
 					</div>
-					<div className="col-3 col-mr-auto">
+					<div className="col-mr-auto">
 					<select id="roles" name="roles" value={this.state.roles} onChange={this.handleChange}>
 						<option value="driver">Driver</option>
 						<option value="student">Student</option>
