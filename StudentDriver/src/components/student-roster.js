@@ -34,10 +34,6 @@ class StudentRoster extends Component {
 
     renderTableData() {
         var results = [];
-        var fN = [];
-        var lN = [];
-        var em = [];
-        var pn = [];
         for (var i=0; i < this.state.usersList.length; i++){
             results.push(
             <tr>

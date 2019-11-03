@@ -9,6 +9,7 @@ import NavbarStudent from './components/navbarStudent'
 import NavbarDriver from './components/navbarDriver'
 import Home from './components/home'
 import StudentRoster from './components/student-roster'
+import DriverRoster from './components/driver-roster'
 import 'bootstrap/dist/css/bootstrap.min.css';//
 
 class App extends Component {
@@ -86,12 +87,17 @@ class App extends Component {
             />}
         />
         <Route
-          path="/studentroster"
+          path="/student-roster"
           render={() =>
             <StudentRoster
             />}
         />
-
+        <Route
+          path="/driver-roster"
+          render={() =>
+            <DriverRoster
+            />}
+        />
       </div>
     );
   }
