@@ -76,10 +76,14 @@ class SimpleMap extends Component {
      });
      console.log(this.state.longitude);
    })
+  
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.role == "driver"){
-      const socket = socketIOClient(this.state.endpoint);
+    const socket = socketIOClient(this.state.endpoint);
+    if(nextProps.role == "student"){
+      console.log("student send!");
+    }
+    else if(nextProps.role == "driver"){
       console.log("received request!\n");
       socket.on("FROM Student", data => {
         console.log(data);
@@ -97,8 +101,11 @@ class SimpleMap extends Component {
   }
 
   accept(){
+    const socket = socketIOClient(this.state.endpoint);
+    socket.emit("Accept", this.state.center);
     alert("pending accept request!")
   }
+
 
   toggle(){
     this.setState({

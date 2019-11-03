@@ -46,6 +46,7 @@ app.use('/user', user)
 app.get('/request', (req, res) => {
 	console.log("here!!\n");
 	var location = JSON.parse(req.query.location);
+	
 	console.log(location);
 	io.emit('FROM Student', location);	
 })
