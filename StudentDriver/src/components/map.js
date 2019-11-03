@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import marker from "./marker_tim.PNG";
-
+import '../assets/stylesheets/Marker.css';
 
 const Marker = (props: any) => {
-    const { color, name, id } = props;
-    return (
-      <div className="marker"
-        style={{ backgroundColor: color, cursor: 'pointer'}}
-        title={name}
-      />
-    );
-  };
- 
+  const { color, name, id } = props;
+  return (
+    <div className="marker"
+      style={{ backgroundColor: color, cursor: 'pointer'}}
+      title={name}
+    />
+  );
+};
 
 const AnyReactComponent = ({ text }) => <div> <img src={marker} height={20} width={16}/> { text } </div>;
 
@@ -56,11 +55,11 @@ class SimpleMap extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-          <AnyReactComponent
+          <Marker
             lat={this.state.latitude}
             lng={this.state.longitude}
-
-            text= "My Marker"
+            color= "blue"
+            name= "My Marker"
           />
         </GoogleMapReact>
       </div>
