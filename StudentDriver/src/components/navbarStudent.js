@@ -9,73 +9,70 @@ import Navbar from 'react-bootstrap/Navbar';
 import logo from '../assets/images/logo.jpg';
 
 class Navbar1 extends Component {
-    constructor() {
-        super()
-        this.logout = this.logout.bind(this)
-    }
+  constructor() {
+    super()
+    this.logout = this.logout.bind(this)
+  }
 
-    logout(event) {
-        event.preventDefault()
-        console.log('logging out')
-        axios.post('/user/logout').then(response => {
-          console.log(response.data)
-          if (response.status === 200) {
-            this.props.updateUser({
-              loggedIn: false,
-              username: null,
-              role: null
-            })
-          }
-        }).catch(error => {
-            console.log('Logout error')
+  logout(event) {
+    event.preventDefault()
+    console.log('logging out')
+    axios.post('/user/logout').then(response => {
+      console.log(response.data)
+      if (response.status === 200) {
+        this.props.updateUser({
+          loggedIn: false,
+          username: null,
+          role: null
         })
       }
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 
-    componentDidMount(){
-        console.log(this.props);
-    }
-     
-    render() {
-        const loggedIn = this.props.loggedIn;
-        console.log('navbar render, props: ')
-        console.log(this.props);
-        const logoStyle = {//style the 
-            width: 40
+  componentDidMount () {
+    console.log(this.props)
+  }
 
-        }
-        
-        return (
-            <div>               
-                <Navbar bg="dark" expand="lg" >
-                <Navbar.Brand><img src={logo} style={{width: 40}}></img></Navbar.Brand>
-                <div className="col-4" >
-                        {loggedIn ? (
-                            <section className="navbar-section">
-                                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
-                                <span className="text-secondary">Logout</span></Link>
-
-                            </section>
-                        ) : (
-                                <section className="navbar-section">
-                                    <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">Request</span>
-                                        </Link>
-                                    <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">Cancel</span>
-				                    </Link>
-                                    
-                                </section>
-                            )}
-                    </div>
-                    <div className="col-4 col-mr-auto">                        
-                    </div>
-
-                </Navbar>              
-            </div>
-
-        );
+  render () {
+    const loggedIn = this.props.loggedIn
+    console.log('navbar render, props: ')
+    console.log(this.props);
+    const logoStyle = {//style the 
+      width: 40
 
     }
+    
+    return (
+      <div>               
+        <Navbar bg="dark" expand="lg" >
+          <Navbar.Brand><img src={logo} style={{width: 40}}></img></Navbar.Brand>
+          <div className="col-4" >
+            {loggedIn ? (
+              <section className="navbar-section">
+                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
+                  <span className="text-secondary">Logout</span>
+                </Link>
+              </section>
+            ) : (
+              <section className="navbar-section">
+                <Link to="/" className="btn btn-link text-secondary">
+                  <span className="text-secondary">Request</span>
+                </Link>
+                <Link to="/" className="btn btn-link text-secondary">
+                  <span className="text-secondary">Cancel</span>
+                </Link>
+              </section>
+            )}
+          </div>
+          <div className="col-4 col-mr-auto"/>                        
+        </Navbar>              
+      </div>
+
+    );
+
+  }
 }
 
 export default Navbar1

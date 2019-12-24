@@ -55,10 +55,10 @@ class StudentRoster extends Component {
     }
     render() {
         return (
-           <div>
+           <div class="dashboard-content">
               <h1 id='title'>Student Roster</h1>
-              <table class="table table-dark">    
-                <thead>
+              <table class="table">    
+                <thead class="thead-dark">
                     <tr>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>

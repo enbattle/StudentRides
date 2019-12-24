@@ -11,77 +11,77 @@ import logo from '../assets/images/logo.jpg';
 
 
 class Navbar1 extends Component {
-    constructor() {
-        super()
-        this.logout = this.logout.bind(this)
-    }
+  constructor() {
+    super()
+    this.logout = this.logout.bind(this)
+  }
 
-    logout(event) {
-        event.preventDefault()
-        console.log('logging out')
-        axios.post('/user/logout').then(response => {
-          console.log(response.data)
-          if (response.status === 200) {
-            this.props.updateUser({
-              loggedIn: false,
-              username: null,
-              role: null
-            })
-          }
-        }).catch(error => {
-            console.log('Logout error')
-        })
+  logout(event) {
+    event.preventDefault()
+    console.log('logging out')
+    axios.post('/user/logout').then(response => {
+      console.log(response.data)
+      if (response.status === 200) {
+      this.props.updateUser({
+        loggedIn: false,
+        username: null,
+        role: null
+      })
       }
-     
-
-    componentDidMount(){
-        console.log(this.props);
+    }).catch(error => {
+      console.log('Logout error')
+    })
     }
-     
-    render() {
-        const loggedIn = this.props.loggedIn;
-        console.log('navbar render, props: ')
-        console.log(this.props);
-        const logoStyle = {//style the 
-            width: 40
+   
 
-        }
-        
-        return (
-            <div className="navbar-section">
-                <Navbar bg="dark" variant="dark" expand="lg"  color="white!important">
-                <Navbar.Brand><img src={logo} style={{width: 60}}></img></Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse className="justify-content-center" id="basic-navbar-nav ">
-                {loggedIn ? (
-                    <Nav className="navbar-section ">
-                        
-                     <Link  to="" className="btn btn-link text-secondary" onClick={this.logout}>
-                        <span className="text-light" >Logout</span></Link >
+  componentDidMount(){
+    console.log(this.props);
+  }
+   
+  render() {
+    const loggedIn = this.props.loggedIn;
+    console.log('navbar render, props: ')
+    console.log(this.props);
+    const logoStyle = {//style the 
+      width: 40
 
-                    </Nav>
-                    
-                        ) : (  
-                           
-                     <Nav className="navbar-section ">
-                     <Link  to="/" className="btn btn-link text-light">
-                            <span className="text-light" >Home</span>
-                        </Link >
-                        <Link  to="/login" className="btn btn-link text-light">
-                            <span className="text-light" >Login</span>
-                        </Link >
-                    </Nav>  
-                    )}
-                   
-                </Navbar.Collapse>
+    }
+    
+    return (
+      <div className="navbar-section">
+        <Navbar bg="dark" variant="dark" expand="lg"  color="white!important">
+          <Navbar.Brand><img src={logo} style={{width: 60}}></img></Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse className="justify-content-center" id="basic-navbar-nav ">
+          {loggedIn ? (
+            <Nav className="navbar-section ">
+              
+            <Link  to="" className="btn btn-link text-secondary" onClick={this.logout}>
+              <span className="text-light" >Logout</span></Link>
+
+            </Nav>
+            
+              ) : (  
                 
-                </Navbar>
+            <Nav className="navbar-section ">
+            <Link  to="/" className="btn btn-link text-light">
+                <span className="text-light" >Home</span>
+              </Link >
+              <Link  to="/login" className="btn btn-link text-light">
+                <span className="text-light" >Login</span>
+              </Link >
+            </Nav>  
+          )}
+           
+        </Navbar.Collapse>
+        
+        </Navbar>
 
-            </div>
+      </div>
 
-        );
+    );
 
-    }
+  }
 }
 
 export default Navbar1

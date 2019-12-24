@@ -7,14 +7,14 @@ mongoose.promise = Promise
 // Define userSchema
 const userSchema = new Schema({
 
-	username: { type: String, unique: true, required: false },
-	password: { type: String, unique: false, required: false },
-	firstName: { type: String, unique: false, required: false },
-    lastName: { type: String, unique: false, required: false },
-    email: { type: String, unique: false, required: false },
-    phoneNumber: { type: String, unique: false, required: false },
-    roles: { type: String, required: false },
-
+  username: { type: String, unique: true, required: false },
+  password: { type: String, unique: false, required: false },
+  firstName: { type: String, unique: false, required: false },
+  profileImage: { type: String, unique: false, required: false },
+  lastName: { type: String, unique: false, required: false },
+  email: { type: String, unique: false, required: false },
+  phoneNumber: { type: String, unique: false, required: false },
+  roles: { type: String, required: false }
 });
 
 userSchema.methods = {

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
 // components
 import Signup from './components/sign-up'
+import SideMenu from './components/dashboard'
 import LoginForm from './components/login-form'
 import NavbarSchool from './components/navbarSchool'
 import NavbarStudent from './components/navbarStudent'
@@ -11,6 +12,7 @@ import Home from './components/home'
 import StudentRoster from './components/student-roster'
 import DriverRoster from './components/driver-roster'
 import 'bootstrap/dist/css/bootstrap.min.css';//
+import DriverSignup from './components/driver-signup';
 
 class App extends Component {
   constructor() {
@@ -18,6 +20,11 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: null,
+      email: '',
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      profileImage: '',
       role: null,
     }
 
@@ -45,6 +52,10 @@ class App extends Component {
         this.setState({
           loggedIn: true,
           username: response.data.user.username,
+          profileImage: response.data.user.profileImage,
+          email: response.data.user.email,
+          firstName: response.data.user.firstName,
+          lastName: response.data.user.lastName,
           role: response.data.user.roles
         }, () =>{
           console.log(this.state.role);
@@ -54,7 +65,12 @@ class App extends Component {
         this.setState({
           loggedIn: false,
           username: null,
-          role: null
+          email: '',
+          firstName: '',
+          lastName: '',
+          phoneNumber: '',
+          profileImage: '',
+          role: null,
         })
       }
     })
@@ -65,41 +81,63 @@ class App extends Component {
     return (
       <div className="App">
    
-        <NavbarSchool role = {this.state.role} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        <NavbarSchool role = {this.state.role} profileImage={this.state.profileImage} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
         {/* greet user if logged in: */}
         {this.state.loggedIn &&
           <p>Join the party, {this.state.username}!</p>
         }
         {/* Routes to different components */}
         <Route
-          path="/" 
-          render = {()=> <Home role={this.state.role}/>}
+          exact path="/" 
+          render={() =>
+            <Home 
+              role={this.state.role}
+            />}
 
-          />
+        />
         <Route
-          path="/login"
+          exact path="/login"
           render={() =>
             <LoginForm
               updateUser={this.updateUser}
             />}
         />
         <Route
-          path="/signup"
+          exact path="/signup/school-admin"
           render={() =>
-            <Signup
+            <Signup role='school-admin'
               signup={this.signup}
             />}
         />
         <Route
-          path="/student-roster"
+          exact path="/signup/driver"
+          render={() =>
+            <Signup role='driver'
+              signup={this.signup}
+            />}
+        />
+        <Route
+          path="/dashboard"
+          render={() =>
+            <SideMenu
+            />}
+        />
+        <Route
+          exact path="/dashboard/student-roster"
           render={() =>
             <StudentRoster role = {this.state.role}
             />}
         />
         <Route
-          path="/driver-roster"
+          exact path="/dashboard/driver-roster"
           render={() =>
             <DriverRoster
+            />}
+        />
+        <Route
+          exact path="/signup/driver-registration"
+          render={() =>
+            <DriverSignup
             />}
         />
       </div>

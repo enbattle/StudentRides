@@ -5,16 +5,17 @@ mongoose.promise = Promise
 
 // Define studentSchema
 const studentSchema = new Schema({
-    student:{
-		type:Schema.Types.ObjectId,
-		ref:'Student'
-
-    },
-    latitude: { type: Number, unique: false, required: true },
-    longitude: { type: Number, unique: false, required: true }
-	
-
-});
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  address: { type: String, unique: false, required: true },
+  graduation_year: { type: Date, required: true },
+  school: {
+    type: Schema.Types.ObjectId,
+    ref: 'School'
+  }
+})
 
 studentSchema.methods = {
     setLocation:function() {

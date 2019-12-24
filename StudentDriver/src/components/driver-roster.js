@@ -60,10 +60,10 @@ class DriverRoster extends Component {
     }
     render() {
         return (
-           <div>
+           <div className="dashboard-content">
               <h1 id='title'>Driver Roster</h1>
-              <table class="table table-dark">    
-                <thead>
+              <table className='table'>    
+                <thead className='thead-dark'>
                     <tr>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
