@@ -6,35 +6,26 @@ mongoose.promise = Promise
 
 // Define userSchema
 const schoolSchema = new Schema({
-
-	schoolName: { type: String, unique: true, required: false },
-  password: { type: String, unique: false, required: false },
-  address: {type: String, unique: false, required: true},
-  latitude: { type: Number, unique: false, required: true },
-  longitude: { type: Number, unique: false, required: true },
+  schoolName: { type: String, unique: true, required: false },
+  address: {type: String, unique: false, required: true },
+  city: { type: String, unique: false, required: true },
+  state: { type: String, unique: false, required: true },
+  zipcode: { type: Number, unique: false, required: true },
+  email: { type: String, unique: false, required: false },
   phoneNumber: { type: String, unique: false, required: false },
-
-});
-
-schoolSchema.methods = {
-    checkPassword: function (inputPassword) {
-    return bcrypt.compareSync(inputPassword, this.password)
+  schoolAdmin: {
+    type: [{ type: Schema.Types.ObjectId, ref: 'SchoolAdmin' }],
+    required: true
   },
-    hashPassword: plainTextPassword => {
-    return bcrypt.hashSync(plainTextPassword, 10)
-    }
-  }
-
-schoolSchema.pre('save', function (next) {
-    if (!this.password) {
-      console.log('models/school.js =======NO PASSWORD PROVIDED=======')
-      next()
-    } else {
-      console.log('models/school.js hashPassword in pre save');
-      this.password = this.hashPassword(this.password)
-      next()
-    }
-  })
+  students: {
+    type: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
+    required: false
+  },
+  drivers: {
+    type: [{ type: Schema.Types.ObjectId, ref: 'Driver' }],
+    required: false
+  } 
+});
 
 const School = mongoose.model('School', schoolSchema)
 module.exports = School

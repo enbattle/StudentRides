@@ -10,7 +10,7 @@ class Home extends Component {
   }
   
   componentDidMount(){
-    console.log(this.props.role);
+    console.log(this.props);
     this.setState({
       role: this.props.role
     })
@@ -23,7 +23,7 @@ class Home extends Component {
     };
     return (
       <div>
-        <SimpleMap role={this.props.role}/>
+        <SimpleMap {...this.props} />
       </div>
     )
   }

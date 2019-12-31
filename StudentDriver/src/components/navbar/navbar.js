@@ -1,53 +1,60 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Route, Link } from 'react-router-dom'
-import '../App.css'
+import '../../App.css'
 import axios from 'axios'
-//import bootstrap stuff
 import Nav from 'react-bootstrap/Nav'
 
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
-import logo from '../assets/images/logo.jpg'
+import logo from '../../assets/images/logo.jpg'
+import DriverNavbar from './navbarDriver'
+import StudentNavbar from './navbarStudent'
+import SchoolAdminNavbar from './navbarSchool'
 
-
-class Navbar1 extends Component {
-  constructor() {
+class SiteNavbar extends Component {
+  constructor () {
     super()
     this.logout = this.logout.bind(this)
   }
 
-  logout(event) {
+  logout (event) {
     event.preventDefault()
-    console.log('logging out')
     axios.post('/user/logout').then(response => {
-      console.log(response.data)
       if (response.status === 200) {
         this.props.updateUser({
           loggedIn: false,
           username: null,
-          role: null
+          email: '',
+          firstName: '',
+          lastName: '',
+          phoneNumber: '',
+          profileImage: '',
+          role: null,
+          school: {}
         })
+        window.location.href = '/'
       }
     }).catch(error => {
-      console.log('Logout error')
+      console.log('Logout error', error)
     })
-    }
-   
-
-  componentDidMount(){
-    console.log(this.props);
   }
-   
-  render() {
-    const loggedIn = this.props.loggedIn;
-    console.log('navbar render, props: ')
-    console.log(this.props);
-    const logoStyle = {//style the 
-      width: 40
 
+  render () {
+    const loggedIn = this.props.loggedIn
+    const role = this.props.role
+    let navbarContent
+    if (loggedIn) {
+      if (role === 'driver') {
+        navbarContent = <DriverNavbar />
+      } else if (role === 'school-admin') {
+        navbarContent = <SchoolAdminNavbar />
+      } else if (role === 'student') {
+        navbarContent = <StudentNavbar />
+      }
+    } else {
+      navbarContent = null
     }
-    
     return (
       <div className="navbar-section">
         <Navbar bg="dark" variant="dark" expand="lg"  color="white!important">
@@ -59,7 +66,8 @@ class Navbar1 extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav ">
             {loggedIn ? (
-              <Nav className="navbar-section ">
+              <Nav className="navbar-section">
+                {navbarContent}
                 <Link to="/dashboard" className="btn btn-secondary" >
                   <span className="text-light" >Dashboard</span>
                 </Link>
@@ -71,9 +79,9 @@ class Navbar1 extends Component {
                   <img src={this.props.profileImage} alt="profile image" />
                 </div>
               </Nav>
-              
-                ) : (  
-                  
+
+            ) : (
+
               <Nav className="mr-sm-2">
                 <NavDropdown title="Sign Up" id="basic-nav-dropdown" >
                   <NavDropdown.Item href="/signup/driver">Driver</NavDropdown.Item>
@@ -83,19 +91,14 @@ class Navbar1 extends Component {
                   <span className="text-light" >Login</span>
                 </Link>
 
-              </Nav>  
-              )}
-            
+              </Nav>
+            )}
           </Navbar.Collapse>
-        
         </Navbar>
 
       </div>
-
-    );
-
+    )
   }
 }
 
-export default Navbar1
-
+export default SiteNavbar

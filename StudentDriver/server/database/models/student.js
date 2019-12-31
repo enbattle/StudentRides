@@ -10,6 +10,9 @@ const studentSchema = new Schema({
     ref: 'User'
   },
   address: { type: String, unique: false, required: true },
+  city: { type: String, unique: false, required: true },
+  state: { type: String, unique: false, required: true },
+  zipcode: { type: Number, unique: false, required: true },
   graduation_year: { type: Date, required: true },
   school: {
     type: Schema.Types.ObjectId,

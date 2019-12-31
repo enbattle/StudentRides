@@ -6,7 +6,6 @@ mongoose.promise = Promise
 
 // Define userSchema
 const userSchema = new Schema({
-
   username: { type: String, unique: true, required: false },
   password: { type: String, unique: false, required: false },
   firstName: { type: String, unique: false, required: false },
@@ -19,6 +18,7 @@ const userSchema = new Schema({
 
 userSchema.methods = {
     checkPassword: function (inputPassword) {
+      console.log("checking:", inputPassword);
     return bcrypt.compareSync(inputPassword, this.password)
   },
     hashPassword: plainTextPassword => {
@@ -27,7 +27,7 @@ userSchema.methods = {
   }
 
 userSchema.pre('save', function (next) {
-    if (!this.password) {
+  if (!this.password) {
       console.log('models/user.js =======NO PASSWORD PROVIDED=======')
       next()
     } else {

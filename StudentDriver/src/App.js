@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
 // components
-import Signup from './components/sign-up'
-import SideMenu from './components/dashboard'
-import LoginForm from './components/login-form'
-import NavbarSchool from './components/navbarSchool'
-import NavbarStudent from './components/navbarStudent'
-import NavbarDriver from './components/navbarDriver'
+import Signup from './components/authentication/sign-up'
+import SideMenu from './components/dashboard/dashboard'
+import LoginForm from './components/authentication/login-form'
+import SiteNavbar from './components/navbar/navbar'
+import SimpleMap from './components/map'
 import Home from './components/home'
-import StudentRoster from './components/student-roster'
-import DriverRoster from './components/driver-roster'
-import 'bootstrap/dist/css/bootstrap.min.css';//
-import DriverSignup from './components/driver-signup';
+import SchoolSignUp from './components/authentication/school-signup'
+import StudentRoster from './components/dashboard/student-roster'
+import DriverRoster from './components/dashboard/driver-roster'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import DriverSignup from './components/authentication/driver-signup';
+import ProtectedRoute from './components/withAuth';
+import Dashboard from './components/dashboard/dashboard-info'
+import Footer from './components/footer'
 
 class App extends Component {
   constructor() {
@@ -26,29 +29,34 @@ class App extends Component {
       phoneNumber: '',
       profileImage: '',
       role: null,
+      school: {}
     }
 
     this.getUser = this.getUser.bind(this)
+    this.getSchool = this.getSchool.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
     this.updateUser = this.updateUser.bind(this)
+
   }
 
-  componentDidMount() {
-    this.getUser()
+  async componentDidMount () {
+    await this.getUser()
+    if (this.state.loggedIn) {
+      console.log(this.state)
+      await this.getSchool()
+      console.log(this.state);
+    }
   }
 
   updateUser (userObject) {
-    console.log(userObject);
     this.setState(userObject)
   }
 
-  getUser() {
-    axios.get('/user/').then(response => {
+  async getUser () {
+    await axios.get('/user/').then(response => {
       console.log('Get user response: ')
       console.log(response.data)
       if (response.data.user) {
-        console.log('Get User: There is a user saved in the server session: ')
-        console.log(response.data.user);
         this.setState({
           loggedIn: true,
           username: response.data.user.username,
@@ -61,7 +69,6 @@ class App extends Component {
           console.log(this.state.role);
         }) 
       } else {
-        console.log('Get user: no user');
         this.setState({
           loggedIn: false,
           username: null,
@@ -76,24 +83,39 @@ class App extends Component {
     })
   }
 
+  async getSchool () {
+    await axios.get('/school/getSchool', { params: { username: this.state.username } }).then(response => {
+      if (response.data.schoolName) {
+        this.setState({
+          school: { ...response.data }
+        })
+      } else {
+        this.setState({
+          school: {}
+        })
+      }
+    })
+  }
+
   render() {
     //
     return (
       <div className="App">
-   
-        <NavbarSchool role = {this.state.role} profileImage={this.state.profileImage} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-        {/* greet user if logged in: */}
-        {this.state.loggedIn &&
-          <p>Join the party, {this.state.username}!</p>
-        }
+        <SiteNavbar {...this.state} updateUser={this.updateUser} />
         {/* Routes to different components */}
         <Route
           exact path="/" 
           render={() =>
-            <Home 
-              role={this.state.role}
+            <SimpleMap
+              {...this.state}
             />}
-
+        />
+        <Route
+          exact path="/dashboard/school-signup"
+          render={() =>
+            <SchoolSignUp
+              username={this.state.username} role={this.state.role}
+            />}
         />
         <Route
           exact path="/login"
@@ -117,15 +139,27 @@ class App extends Component {
             />}
         />
         <Route
-          path="/dashboard"
+          exact path="/dashboard/student-signup"
           render={() =>
-            <SideMenu
-            />}
+            <div className='dashboard-content'>
+              <Signup role='student' admin={this.state.username}
+                signup={this.signup}
+              />
+            </div>}
+        />
+        <ProtectedRoute
+          path='/dashboard'
+          component={SideMenu}
+          role={this.state.role}
+        />
+        <Route
+          exact path="/dashboard"
+          render={() => <Dashboard role={this.state.role} />}
         />
         <Route
           exact path="/dashboard/student-roster"
           render={() =>
-            <StudentRoster role = {this.state.role}
+            <StudentRoster role={this.state.role}
             />}
         />
         <Route
@@ -140,6 +174,7 @@ class App extends Component {
             <DriverSignup
             />}
         />
+      <Footer/>
       </div>
     );
   }

@@ -3,10 +3,41 @@
   position: relative;
 }
 
+.dashboard-link{
+  font-size: 1.25em;
+  font-weight: 25;
+  color: white;
+  text-align: center;
+}
+
+
+.dashboard-link:hover{
+  border-bottom: 0px;
+}
+
 .dashboard-content{
   margin-left: 400px;
   margin-right: 20px;
   margin-top: 30px;
+}
+
+.sidebarToggle{
+  z-index: 100;
+  position: relative;
+  font-size: 3em;
+  padding-top: 0px;
+  margin-left: 10px;
+  float: left;
+  top: 50% !important;
+}
+
+.sidebarToggle:hover{
+  cursor: pointer;
+}
+
+.dashboard-title{
+  margin-left: 10px;
+  margin-bottom: 20px;
 }
 
 .sidenav {
@@ -16,7 +47,6 @@
   z-index: 0;
   top: 0;
   left: 0;
-  background-color: #b8bdc0;
   overflow-x: hidden;
   padding-top: 200px;
 }
@@ -24,14 +54,14 @@
 .sidenav a {
   padding: 20px 8px 20px 16px;
   text-decoration: none;
-  font-size: 25px;
-  color: #818181;
   display: block;
-  border-top: 1px solid black;
+  border-top: 1px solid rgb(255, 255, 255);
 }
 
 .sidenav a:hover {
-  color: #f1f1f1;
+  background-color: #f1f1f1;
+  color: #5a5a5a;
+  border-bottom: 0px solid black;
 }
 
 .main {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SimpleMap from './map.js';
+import SimpleMap from '../map.js';
 
 class StudentRoster extends Component {
     constructor() {
