@@ -6,16 +6,18 @@ import Signup from './components/authentication/sign-up'
 import SideMenu from './components/dashboard/dashboard'
 import LoginForm from './components/authentication/login-form'
 import SiteNavbar from './components/navbar/navbar'
-import SimpleMap from './components/map'
+import SimpleMap from './components/simplemap'
 import Home from './components/home'
 import SchoolSignUp from './components/authentication/school-signup'
 import StudentRoster from './components/dashboard/student-roster'
 import DriverRoster from './components/dashboard/driver-roster'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import DriverSignup from './components/authentication/driver-signup';
 import ProtectedRoute from './components/withAuth';
 import Dashboard from './components/dashboard/dashboard-info'
 import Footer from './components/footer'
+import '@fortawesome/fontawesome-free/css/all.min.css'
+import 'bootstrap-css-only/css/bootstrap.min.css'
+import 'mdbreact/dist/css/mdb.css'
 
 class App extends Component {
   constructor() {
@@ -104,6 +106,13 @@ class App extends Component {
         <SiteNavbar {...this.state} updateUser={this.updateUser} />
         {/* Routes to different components */}
         <Route
+          exact path="/home" 
+          render={() =>
+            <Home
+              {...this.state}
+            />}
+        />
+        <Route
           exact path="/" 
           render={() =>
             <SimpleMap
@@ -154,7 +163,7 @@ class App extends Component {
         />
         <Route
           exact path="/dashboard"
-          render={() => <Dashboard role={this.state.role} />}
+          render={() => <Dashboard {...this.state} />}
         />
         <Route
           exact path="/dashboard/student-roster"

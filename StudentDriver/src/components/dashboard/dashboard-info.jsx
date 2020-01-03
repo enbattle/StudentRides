@@ -11,13 +11,23 @@ class Dashboard extends Component {
     this.state = {}
   }
 
+  static getDerivedStateFromProps (nextProps, prevState) {
+    console.log(nextProps);
+    console.log(prevState);
+    if (nextProps.school !== prevState.school && nextProps.role === 'school-admin') {
+      return { ...nextProps.school }
+    } else {
+      return null
+    }
+  }
+
   render () {
     const role = this.props.role
     let dashboardContent
     if (role === 'driver') {
       dashboardContent = <DriverDash />
     } else if (role === 'school-admin') {
-      dashboardContent = <SchoolAdminDash />
+      dashboardContent = <SchoolAdminDash {...this.state} />
     } else if (role === 'student') {
       dashboardContent = <StudentDash />
     }

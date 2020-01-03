@@ -1,0 +1,74 @@
+html,
+body,
+header,
+.carousel {
+  height: 60vh !important;
+}
+
+.title-caption{
+  font-size: 5em;
+}
+
+.carousel-container{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  
+}
+
+.text-shadow{
+  text-shadow: 4px 2px 4px rgb(0, 0, 0);
+}
+
+.home .nav-link{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.nav-item{
+  margin-left: 40px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.caption {
+  position: absolute;
+  top: 20%;
+  bottom: 15%;
+  left: 15%;
+  right: 15%;
+  z-index: 1000;
+
+}
+
+.carousel{
+  max-height: 700px !important;
+  overflow: hidden;
+
+}
+
+@media (max-width: 740px) {
+  html,
+  body,
+  header,
+  .carousel {
+    height: 100vh;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+  html,
+  body,
+  header,
+  .carousel {
+    height: 100vh;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+        .navbar:not(.top-nav-collapse) {
+            background: #1C2331!important;
+        }
+    }
+.view,body,html{height:100%}@media (max-width:740px){.full-page-intro{height:1000px}}.carousel{height:50%}.carousel .carousel-inner,.carousel .carousel-inner .active,.carousel .carousel-inner .carousel-item{height:100%}@media (max-width:776px){.carousel{height:100%}}.navbar{background-color:rgba(0,0,0,.3)}.page-footer,.top-nav-collapse{background-color:#1C2331}@media only screen and (max-width:768px){.navbar{background-color:#1C2331}}

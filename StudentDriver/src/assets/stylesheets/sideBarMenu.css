@@ -4,7 +4,7 @@
 }
 
 .dashboard-link{
-  font-size: 1.25em;
+  font-size: 1em;
   font-weight: 25;
   color: white;
   text-align: center;
@@ -24,7 +24,7 @@
 .sidebarToggle{
   z-index: 100;
   position: relative;
-  font-size: 3em;
+  font-size: 2.5em;
   padding-top: 0px;
   margin-left: 10px;
   float: left;
@@ -38,17 +38,18 @@
 .dashboard-title{
   margin-left: 10px;
   margin-bottom: 20px;
+  font-size: 2em;
 }
 
 .sidenav {
   height: 100%;
-  width: 300px;
+  width: 200px;
   position: fixed;
   z-index: 0;
   top: 0;
   left: 0;
   overflow-x: hidden;
-  padding-top: 200px;
+  padding-top: 0px;
 }
 
 .sidenav a {
