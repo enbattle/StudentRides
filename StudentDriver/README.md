@@ -19,7 +19,7 @@ Also, be sure to have `git` available in your PATH, `npm` might need it (You can
 ## Install
 
     $ git clone https://github.com/enbattle/StudentRides.git
-    $ cd PROJECT_TITLE
+    $ cd PROJECT_TITLE/StudentDriver
 
 ### Install dependencies
 
